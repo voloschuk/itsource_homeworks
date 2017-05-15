@@ -10,6 +10,8 @@
 
 package com.sourceit.com.sourceit.lesson3;
 
+import java.util.Arrays;
+
 /**
  * Prints Matrix.
  *
@@ -33,7 +35,7 @@ public class MatrixPrinter {
 
         for (int i = 0; i < rowsNum; i++) {
             if (array[i].length == colsNum) {
-                for (int j = 0; j < colsNum; j++) {
+                for (int j = 0; j < array[i].length; j++) {
                     if (maxColsLength[j] == 0) {
                         //Calculate max length of the column
                         for (int k = 0; k < rowsNum; k++) {
