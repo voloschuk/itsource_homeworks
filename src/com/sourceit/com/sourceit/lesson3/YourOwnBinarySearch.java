@@ -21,7 +21,7 @@ package com.sourceit.com.sourceit.lesson3;
  */
 public class YourOwnBinarySearch {
     static int[] array = {1, 4, 7, 10, 15, 30, 48};
-    static int element = 4;
+    static int element = 7;
 
     public static void main(String[] args) {
         System.out.println(binarySearch(array, element));
@@ -45,7 +45,7 @@ public class YourOwnBinarySearch {
             }
 
             while (endPos - startPos > 1) {
-                int middlePos = (int) ((startPos + endPos) / 2);
+                int middlePos = (startPos + endPos) / 2;
                 if (array[middlePos] == elem) {
                     return middlePos;
                 } else if (array[middlePos] > elem) {
