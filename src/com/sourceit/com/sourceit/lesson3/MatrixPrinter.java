@@ -10,8 +10,6 @@
 
 package com.sourceit.com.sourceit.lesson3;
 
-import java.util.Arrays;
-
 /**
  * Prints Matrix.
  *
