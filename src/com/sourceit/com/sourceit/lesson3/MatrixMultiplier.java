@@ -15,5 +15,23 @@ public class MatrixMultiplier {
                 {3, 4, 6}
         };
 
+        int colsNum;
+        int rowsNum;
+        if (first.length > 0) {
+            colsNum = first[0].length;
+            rowsNum = second.length;
+            if (colsNum == rowsNum) {
+                System.out.println(" " + second[0].length + " " + first.length);
+                int[][] result = new int[second[0].length][first.length];
+
+                /*for (int i = 0; i < colsNum; i++) {
+                    for (int j = 0; j < rowsNum; j++) {
+                        result[i][j] += first[i][j] * second[j][i];
+                    }
+                }*/
+
+
+            }
+        }
     }
 }
