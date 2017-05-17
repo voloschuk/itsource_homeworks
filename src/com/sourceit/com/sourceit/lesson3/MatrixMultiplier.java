@@ -1,5 +1,7 @@
 package com.sourceit.com.sourceit.lesson3;
 
+import java.util.Arrays;
+
 public class MatrixMultiplier {
     public static void main(String[] args) {
         int[][] first = {
@@ -9,29 +11,33 @@ public class MatrixMultiplier {
         };
 
         int[][] second = {
-                {1, 2, 3},
-                {3, 4, 6},
-                {7, 5, 1},
-                {3, 4, 6}
+                {1, 2, 3, 4},
+                {3, 4, 6, 5},
+                {7, 5, 1, 0},
+                {3, 4, 6, 6}
         };
 
-        int colsNum;
-        int rowsNum;
-        if (first.length > 0) {
-            colsNum = first[0].length;
-            rowsNum = second.length;
-            if (colsNum == rowsNum) {
-                System.out.println(" " + second[0].length + " " + first.length);
-                int[][] result = new int[second[0].length][first.length];
+        int firstRowsNum = first.length;
+        int firstColsNum = firstRowsNum > 0 ? first[0].length : 0;
+        int secondRowsNum = second.length;
+        int secondColsNum = secondRowsNum > 0 ? second[0].length : 0;
+        if (firstColsNum == secondRowsNum) {
+            int[][] result = new int[firstRowsNum][secondColsNum];
 
-                /*for (int i = 0; i < colsNum; i++) {
-                    for (int j = 0; j < rowsNum; j++) {
-                        result[i][j] += first[i][j] * second[j][i];
+            for (int i = 0; i < firstRowsNum; i++) {
+                for (int j = 0; j < secondColsNum; j++) {
+
+                    int productSum = 0;
+                    for (int k = 0; k < firstColsNum; k++) {
+                        productSum += first[i][k] * second[k][j];
                     }
-                }*/
+                    result[i][j] = productSum;
 
-
+                }
+                System.out.println(Arrays.toString(result[i]));
             }
+        } else {
+            System.out.println("Incorrect matrix format.");
         }
     }
 }
