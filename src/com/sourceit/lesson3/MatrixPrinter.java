@@ -8,7 +8,7 @@
  * This software is free
  */
 
-package com.sourceit.com.sourceit.lesson3;
+package com.sourceit.lesson3;
 
 /**
  * Prints Matrix.

@@ -8,7 +8,7 @@
  * This software is free
  */
 
-package com.sourceit.com.sourceit.lesson3;
+package com.sourceit.lesson3;
 
 
 import java.util.Arrays;
@@ -43,7 +43,7 @@ public class MatrixInverter {
                 }
             }
             for (int i = 0; i < rowsNum; i++) {
-                System.out.println("Inverted array: " + Arrays.toString(array[i]));
+                System.out.println(Arrays.toString(array[i]));
             }
         } else {
             System.out.println("Incorrect matrix structure to invert.");
