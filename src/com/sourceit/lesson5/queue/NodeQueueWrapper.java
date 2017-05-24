@@ -71,6 +71,10 @@ public class NodeQueueWrapper {
             System.out.println("Position must be >= 0");
             return;
         }
+        if (countNodes - 1 - position < 0) {
+            System.out.println("Position is more than list size.");
+            return;
+        }
         if (position <= countNodes - 1) {
             int foundPos = countNodes - 1 - position;
             if (foundPos == 0) {
@@ -103,38 +107,90 @@ public class NodeQueueWrapper {
             System.out.println("Inserted node shouln'd be empty!");
             return;
         }
-        if (countNodes == 0 && position == 0) {
-            tail = node;
-            countNodes++;
-        } else if (position <= countNodes - 1) {
-            int foundPos = countNodes - 1 - position;
-            if (foundPos == 0) {
+        if (countNodes - position < 0) {
+            System.out.println("Position is more than list size.");
+        } else {
+            if (countNodes == 0 && position == 0) {
+                tail = node;
+            } else if (countNodes - position == 0) {
                 node.setNext(tail);
                 tail = node;
             } else {
-                QueueNode prev = tail;
-                QueueNode current = prev.getNext();
-                foundPos--;
-                while (foundPos >= 0) {
-                    prev = current;
-                    current = prev.getNext();
-                    foundPos--;
+//                int foundPos = countNodes - 1 - position;
+//                QueueNode prev = tail;
+//                QueueNode current = prev.getNext();
+//                foundPos--;
+//                while (foundPos >= 0) {
+//                    prev = current;
+//                    current = prev.getNext();
+//                    foundPos--;
+//                }
+                QueueNode prev = getNodeBeforePosition(position);
+                if (prev == null) {
+                    node.setNext(tail);
+                    tail = node;
+                } else {
+                    QueueNode current = prev.getNext();
+                    prev.setNext(node);
+                    node.setNext(current);
                 }
-                prev.setNext(node);
-                node.setNext(current);
             }
             countNodes++;
         }
     }
 
     /**
-     * Gets then Node that located on the position starting from the tail (end of the list)
+     * Gets then Node that located on the position starting from the head (start of the list)
      * if position is more than list size - prints error message
      * @param position number of the Node starting from the tail
-     * @return Node that located on the position from the tail (end of list) if position exists in list
+     * @return Node that located on the position from the head (start of list) if position exists in list
      */
     public QueueNode getFromHead(int position) {
-        /*Your code here and please remove "return null". I've put it for ability to compile code*/
-        return null;
+        if (countNodes - 1 - position < 0) {
+            System.out.println("Position is more than list size.");
+            return null;
+        } else {
+            QueueNode prev = getNodeBeforePosition(position);
+            QueueNode current = null;
+            if (prev == null) {
+                current = tail;
+                tail = tail.getNext();
+            } else {
+                current = prev.getNext();
+                prev.setNext(current.getNext());
+            }
+
+//            int foundPos = countNodes - 1 - position;
+//            QueueNode current = null;
+//            if (foundPos == 0) {
+//                current = tail;
+//                tail = tail.getNext();
+//            } else {
+//                QueueNode prev = tail;
+//                current = prev.getNext();
+//                foundPos--;
+//                while (foundPos > 0) {
+//                    prev = current;
+//                    current = prev.getNext();
+//                    foundPos--;
+//                }
+//                prev.setNext(current.getNext());
+//            }
+            countNodes--;
+            return current;
+        }
+    }
+
+    private QueueNode getNodeBeforePosition(int position)
+    {
+        int foundPos = countNodes - 1 - position;
+        QueueNode prev = null;
+        QueueNode current = tail;
+        while (foundPos > 0) {
+            prev = current;
+            current = prev.getNext();
+            foundPos--;
+        }
+        return  prev;
     }
 }

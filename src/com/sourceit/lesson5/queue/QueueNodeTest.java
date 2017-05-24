@@ -1,5 +1,7 @@
 package com.sourceit.lesson5.queue;
 
+import java.util.Queue;
+
 public class QueueNodeTest {
     public static void main(String[] args) {
         NodeQueueWrapper queue = new NodeQueueWrapper(new QueueNode(1));
@@ -35,7 +37,17 @@ public class QueueNodeTest {
 
         queue.addNode(0, new QueueNode(1));
         queue.addNode(0, new QueueNode(3));
-        queue.addNode(2, new QueueNode(5));
+        queue.addNode(0, new QueueNode(5));
+        queue.addNode(1, new QueueNode(4));
+        queue.addNode(3, new QueueNode(2));
+        queue.addNode(5, new QueueNode(0));
+        queue.addNode(7, new QueueNode(10));
+        queue.printQueue();
+
+        System.out.println("Get from head.");
+        System.out.println(queue.getFromHead(0).getValue());
+        System.out.println(queue.getFromHead(0).getValue());
+        System.out.println(queue.getFromHead(3).getValue());
         queue.printQueue();
     }
 
