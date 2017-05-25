@@ -71,28 +71,18 @@ public class NodeQueueWrapper {
             System.out.println("Position must be >= 0");
             return;
         }
-        if (countNodes - 1 - position < 0) {
+        if (countNodes - position - 1 < 0) {
             System.out.println("Position is more than list size.");
             return;
-        }
-        if (position <= countNodes - 1) {
-            int foundPos = countNodes - 1 - position;
-            if (foundPos == 0) {
+        } else {
+            QueueNode prev = getNodeBeforePosition(position);
+            if (prev == null) {
                 tail = tail.getNext();
             } else {
-                QueueNode prev = tail;
                 QueueNode current = prev.getNext();
-                foundPos--;
-                while (foundPos > 0) {
-                    prev = current;
-                    current = prev.getNext();
-                    foundPos--;
-                }
                 prev.setNext(current.getNext());
             }
             countNodes--;
-        } else {
-            System.out.println("List is empty!");
         }
     }
 
@@ -110,30 +100,19 @@ public class NodeQueueWrapper {
         if (countNodes - position < 0) {
             System.out.println("Position is more than list size.");
         } else {
-            if (countNodes == 0 && position == 0) {
-                tail = node;
-            } else if (countNodes - position == 0) {
+            if (countNodes - position == 0) {
                 node.setNext(tail);
                 tail = node;
             } else {
-//                int foundPos = countNodes - 1 - position;
-//                QueueNode prev = tail;
-//                QueueNode current = prev.getNext();
-//                foundPos--;
-//                while (foundPos >= 0) {
-//                    prev = current;
-//                    current = prev.getNext();
-//                    foundPos--;
-//                }
                 QueueNode prev = getNodeBeforePosition(position);
+                QueueNode current;
                 if (prev == null) {
-                    node.setNext(tail);
-                    tail = node;
+                    current = tail;
                 } else {
-                    QueueNode current = prev.getNext();
-                    prev.setNext(node);
-                    node.setNext(current);
+                    current = prev.getNext();
                 }
+                node.setNext(current.getNext());
+                current.setNext(node);
             }
             countNodes++;
         }
@@ -159,28 +138,16 @@ public class NodeQueueWrapper {
                 current = prev.getNext();
                 prev.setNext(current.getNext());
             }
-
-//            int foundPos = countNodes - 1 - position;
-//            QueueNode current = null;
-//            if (foundPos == 0) {
-//                current = tail;
-//                tail = tail.getNext();
-//            } else {
-//                QueueNode prev = tail;
-//                current = prev.getNext();
-//                foundPos--;
-//                while (foundPos > 0) {
-//                    prev = current;
-//                    current = prev.getNext();
-//                    foundPos--;
-//                }
-//                prev.setNext(current.getNext());
-//            }
             countNodes--;
             return current;
         }
     }
 
+    /**
+     * Returns previous node before searching position
+     * @param position
+     * @return Returns previous node before searching position
+     */
     private QueueNode getNodeBeforePosition(int position)
     {
         int foundPos = countNodes - 1 - position;
