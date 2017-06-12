@@ -1,12 +1,14 @@
 package com.sourceit.lesson8.iter;
 
-import java.util.Iterator;
-
-public class QueueIteratorReverse<T> implements Iterator<T> {
+public class QueueIteratorReverse<T> extends QueueIteratorAbstract<T> {
     private Node<T>[] holder;
     private int position = -1;
 
     public QueueIteratorReverse(Node<T> tail) {
+        super(tail);
+    }
+
+    public void setCurrent(Node<T> tail) {
         if (tail == null) {
             return;
         }
@@ -15,15 +17,16 @@ public class QueueIteratorReverse<T> implements Iterator<T> {
         do {
             num++;
             current = current.getNext();
-        } while (current.getNext() != null);
+        } while (current != null);
 
         if (num > 0) {
             this.holder = new Node[num];
             int i = 0;
+            current = tail;
             do {
                 this.holder[i++] = current;
                 current = current.getNext();
-            } while (current.getNext() != null);
+            } while (current != null);
             this.position = num - 1;
         }
     }
@@ -37,11 +40,11 @@ public class QueueIteratorReverse<T> implements Iterator<T> {
     public T next() {
         T result = this.holder[position].getValue();
         this.position--;
+        if (!this.hasNext()) {
+            for (int i = 0; i < this.holder.length; i++) {
+                this.holder[i] = null;
+            }
+        }
         return result;
-    }
-
-    @Override
-    public void remove() {
-        throw new IllegalStateException();
     }
 }

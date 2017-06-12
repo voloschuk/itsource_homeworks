@@ -1,11 +1,13 @@
 package com.sourceit.lesson8.iter;
 
-import java.util.Iterator;
-
-public class QueueIterator<T> implements Iterator<T> {
+public class QueueIteratorDirect<T> extends QueueIteratorAbstract<T> {
     private Node<T> current;
 
-    public QueueIterator(Node<T> tail) {
+    public QueueIteratorDirect(Node<T> tail) {
+        super(tail);
+    }
+
+    public void setCurrent(Node<T> tail) {
         current = tail;
     }
 
@@ -19,10 +21,5 @@ public class QueueIterator<T> implements Iterator<T> {
         T result = current.getValue();
         current = current.getNext();
         return result;
-    }
-
-    @Override
-    public void remove() {
-        throw new IllegalStateException();
     }
 }

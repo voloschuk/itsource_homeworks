@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 public class Queue<T> implements Iterable<T> {
     private Node<T> tail;
+    private QueueIteratorAbstract<T> iterator;
 
     public Queue() {
         tail = null;
@@ -38,6 +39,17 @@ public class Queue<T> implements Iterable<T> {
         return current.getValue();
     }
 
+    public QueueIteratorAbstract<T> getIterator() {
+        return this.iterator;
+    }
+
+    public void setReverseOrder(boolean isReverse) {
+        if (isReverse) {
+            this.iterator = new QueueIteratorReverse<>(tail);
+        }
+    }
+
+
     @Override
     public String toString() {
         String result = "";
@@ -52,6 +64,11 @@ public class Queue<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new QueueIteratorReverse<>(tail);
+        if (this.iterator == null) {
+            this.iterator = new QueueIteratorDirect<>(tail);
+        } else {
+            this.iterator.setCurrent(tail);
+        }
+        return this.iterator;
     }
 }
