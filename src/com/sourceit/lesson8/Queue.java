@@ -1,4 +1,4 @@
-package com.sourceit.lesson8.iter;
+package com.sourceit.lesson8;
 
 import java.util.Iterator;
 

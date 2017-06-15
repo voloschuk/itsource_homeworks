@@ -1,4 +1,4 @@
-package com.sourceit.lesson6.examples.binaryTree;
+package com.sourceit.lesson6;
 
 public class TreeUtils {
 
